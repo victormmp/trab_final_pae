@@ -1,0 +1,197 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+data <- read.csv("./clear_amazon.csv")
+
+data <- data[,!(names(data) %in% c("date"))]
+
+
+data2 <- with(data,
+                    aggregate(x = number,
+                              by = list(year, state),
+                              FUN = sum
+                              )
+                    )
+
+data <- with(data,
+                    aggregate(x = number,
+                              by = list(date),
+                              FUN = sum
+                              )
+                    )
+
+jan <- which(data['Group.2'] == 'Janeiro')
+fev <- which(data['Group.2'] == 'Fevereiro')
+mar <- which(data['Group.2'] == 'Março')
+abr <- which(data['Group.2'] == 'Abril')
+mai <- which(data['Group.2'] == 'Maio')
+jun <- which(data['Group.2'] == 'Junho')
+jul <- which(data['Group.2'] == 'Julho')
+ago <- which(data['Group.2'] == 'Agosto')
+set <- which(data['Group.2'] == 'Setembro')
+out <- which(data['Group.2'] == 'Outubro')
+nov <- which(data['Group.2'] == 'Novembro')
+dez <- which(data['Group.2'] == 'Dezembro')
+
+data_matrix <- data.matrix(data)
+
+jan <- data_matrix[jan, 3]
+fev <- data_matrix[fev, 3]
+mar <- data_matrix[mar, 3]
+abr <- data_matrix[abr, 3]
+mai <- data_matrix[mai, 3]
+jun <- data_matrix[jun, 3]
+jul <- data_matrix[jul, 3]
+ago <- data_matrix[ago, 3]
+set <- data_matrix[set, 3]
+out <- data_matrix[out, 3]
+nov <- data_matrix[nov, 3]
+dez <- data_matrix[dez, 3]
+
+bim1 <- jan + fev
+bim2 <- mar + abr
+bim3 <- mai + jun
+bim4 <- jul + ago
+bim5 <- set + out
+bim6 <- nov[1:19] + dez
+
+groupb1 = replicate(20, 'bim1')
+groupb2 = replicate(20, 'bim2')
+groupb3 = replicate(20, 'bim3')
+groupb4 = replicate(20, 'bim4')
+groupb5 = replicate(20, 'bim5')
+groupb6 = replicate(19, 'bim6')
+BN = c(groupb1, groupb2, groupb3, groupb4, groupb5, groupb6)
+B = c(bim1, bim2, bim3, bim4, bim5, bim6)
+
+M <- c(jan, fev, mar, abr, mai, jun, jul, ago, set, out, nov, dez)
+MN <- c(replicate(20, 'jan'), replicate(20, 'fev'), replicate(20, 'mar'), replicate(20,'abr'), replicate(20, 'mai'), replicate(20, 'jun'), replicate(20,'jul'), replicate(20, 'ago'),replicate(20, 'set'), replicate(20, 'out'), replicate(20, 'nov'), replicate(19,'dez'))
+
+dataframe_meses <- as.data.frame(MN)
+dataframe_meses['values'] <- as.data.frame(M)
+
+dataframe_bim <- as.data.frame(BN)
+dataframe_bim['values'] <- as.data.frame(B)
+
+
+AC <- which(data2['Group.2'] == 'Acre')
+AL <- which(data2['Group.2'] == 'Alagoas')
+AP <- which(data2['Group.2'] == 'Amapa')
+AM <- which(data2['Group.2'] == 'Amazonas')
+BA <- which(data2['Group.2'] == 'Bahia')
+CE <- which(data2['Group.2'] == 'Ceara')
+DF <- which(data2['Group.2'] == 'Distrito Federal')
+ES <- which(data2['Group.2'] == 'Espirito Santo')
+GO <- which(data2['Group.2'] == 'Goias')
+MA <- which(data2['Group.2'] == 'Maranhao')
+MT <- which(data2['Group.2'] == 'Mato Grosso')
+MS <- which(data2['Group.2'] == 'Mato Grosso do Sul')
+MG <- which(data2['Group.2'] == 'Minas Gerais')
+PA <- which(data2['Group.2'] == 'Pará')
+PB <- which(data2['Group.2'] == 'Paraiba')
+PN <- which(data2['Group.2'] == 'Parana')
+PE <- which(data2['Group.2'] == 'Pernambuco')
+PI <- which(data2['Group.2'] == 'Piau')
+RJ <- which(data2['Group.2'] == 'Rio de Janeiro')
+RN <- which(data2['Group.2'] == 'Rio Grando do Norte')
+RS <- which(data2['Group.2'] == 'Rio Grande do Sul')
+RO <- which(data2['Group.2'] == 'Rondonia')
+RR <- which(data2['Group.2'] == 'Roraima')
+SC <- which(data2['Group.2'] == 'Santa Catarina')
+SP <- which(data2['Group.2'] == 'Sao Paulo')
+SE <- which(data2['Group.2'] == 'Sergipe')
+TO <- which(data2['Group.2'] == 'Tocantins')
+
+data_matrix <- data.matrix(data2)
+
+AC <- data_matrix[AC, 3]
+AL <- data_matrix[AL, 3]
+AP <- data_matrix[AP, 3]
+AM <- data_matrix[AM, 3]
+BA <- data_matrix[BA, 3]
+CE <- data_matrix[CE, 3]
+DF <- data_matrix[DF, 3]
+ES <- data_matrix[ES, 3]
+GO <- data_matrix[GO, 3]
+MA <- data_matrix[MA, 3]
+MT <- data_matrix[MT, 3]
+MS <- data_matrix[MS, 3]
+MG <- data_matrix[MG, 3]
+PA <- data_matrix[PA, 3]
+PB <- data_matrix[PB, 3]
+PE <- data_matrix[PE, 3]
+PI <- data_matrix[PI, 3]
+RJ <- data_matrix[RJ, 3]
+RN <- data_matrix[RN, 3]
+RS <- data_matrix[RS, 3]
+RO <- data_matrix[RO, 3]
+RR <- data_matrix[RR, 3]
+SC <- data_matrix[SC, 3]
+SP <- data_matrix[SP, 3]
+SE <- data_matrix[SE, 3]
+TO <- data_matrix[TO, 3]
+
+E <- c(AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MT, MS, MG, PA, PB, PN, PE, PI, RJ, RN, RS, RO, RR, SC, SP, SE, TO)
+
+EN <- c(
+replicate(20, 'AC'), replicate(20, 'AL'), replicate(20, 'AP'), replicate(20, 'AM'), replicate(20, 'BA'), replicate(20, 'CE'), replicate(20, 'DF'), replicate(20, 'ES'), replicate(20, 'GO'), replicate(20, 'MA'), replicate(20, 'MT'), replicate(20, 'MS'), replicate(20, 'MG'), replicate(20, 'PA'), replicate(20, 'PB'), replicate(20, 'PN'), replicate(20, 'PE'), replicate(20, 'PI'), replicate(20, 'RJ'), replicate(20, 'RN'), replicate(20, 'RS'), replicate(20, 'RO'), replicate(20, 'RR'), replicate(20, 'SC'), replicate(20, 'SP'), replicate(20, 'SE'), replicate(20, 'TO'))
+
+NORTE = AC + AP + AM + RO + RR + PA + TO
+SUL = RS + PN + SC
+SUDESTE = MG + RJ + ES + SP
+NORDESTE = MA + BA + PI + AL + SE + CE + RN + PB + PE
+CENTRO = MT + MS + DF + GO
+
+R <- c(NORTE/0.45, NORDESTE/0.18, SUDESTE/0.11, CENTRO/0.19, SUL/0.07)
+R <- c(NORTE/3869.637, NORDESTE/1556, SUDESTE/927.286, CENTRO/1612, SUL/575.316)
+
+RRN <- c(
+  replicate(20, 'Norte'), 
+  replicate(20, 'Nordeste'), 
+  replicate(20, 'Sudeste'), 
+  replicate(20, 'Centro-Oeste'), 
+  replicate(20, 'Sul')
+)
+
+
+#POSSIVEIS COMBINACOES
+#R ~ RRN
+#E ~ EN
+#B ~ BN
+#M ~ MN
+
+# ANOVA
+
+#homocedasticidade
+model <- aov(number ~ month*state,
+             data=data)
+
+replications(number ~ month*state,
+    data=data)
+
+library(multcomp)
+mcp.manuf <- glht(model, linfct = mcp(month = "Tukey"))
+plot(confint(mcp.manuf),
+     cex.axis   = 1.2,
+     cex        = 2)
+
+shapiro.test(model$residuals[1:5000])
+
+interfac <- with(data,
+                 interaction(month, state))
+which.max(tapply(data$number, interfac, mean))
+interfac <- relevel(interfac, ref = "Agosto.Pará")
+
+model2 <- aov(number ~ interfac,
+              data = data)
+mcp.inter <- glht(model2,
+                  linfct = mcp(interfac = "Dunnett"))
+
+par(mar = c(5,12,4,2))
+plot(confint(mcp.inter),
+     cex.axis   = 1.2,
+     cex        = 2)
+
+shapiro.test(model2$residuals[1:5000])
